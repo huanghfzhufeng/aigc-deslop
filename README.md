@@ -2,9 +2,9 @@
 
 > 把被 AI 抹平的"人之痕迹"，重新还回字里行间。
 
-一套用于**中文论文降 AIGC 率**的方法论 + 工具集。基于真实毕业论文的多次迭代验证，从 **49.6% AIGC 率降至 27%**（仅 3 段验证），为 Claude Code 设计的 Skill。
+一套用于**中文论文降 AIGC 率**的方法论 + 工具集。基于真实毕业论文的 9 轮迭代验证，从 **55% AIGC 率降至 11%**（全文实测），为 Claude Code 设计的 Skill。
 
-**English summary**: A Chinese-language methodology and toolset for reducing AI-detection rates in Chinese academic papers. Includes a Claude Code Skill (SKILL.md) and a Python script that rewrites paragraphs while preserving Word document formatting (tables, images, citation superscripts, fonts). Verified to reduce PaperPure AIGC detection rate from 49.6% to 27% on real thesis data.
+**English summary**: A Chinese-language methodology and toolset for reducing AI-detection rates in Chinese academic papers. Includes a Claude Code Skill (SKILL.md) and a Python script that rewrites paragraphs while preserving Word document formatting (tables, images, citation superscripts, fonts byte-for-byte). **Verified to reduce PaperPure AIGC detection rate from 55% to 11% on a full thesis** through 9 iterations.
 
 ---
 
@@ -43,10 +43,13 @@ PaperPure 等检测器训练时见过大量 LLM 输出（GPT/Claude/DeepSeek/Kim
 
 | 版本 | AIGC 率 | 关键策略 |
 |------|--------|---------|
-| 原始 AI 写的论文 | ~65-75% | — |
-| 用其他工具改的 | 40.5% | 句式调整 |
-| **错误模仿"半口语化"** | **49.6% ↑** | 破折号、"这一X"、对偶过渡（**反弹**） |
-| **本科生答辩稿风格** | **27.0% ↓** | 零破折号 + 第一人称 + 强制冗余 + 模糊限定 |
+| 原始 AI 写的论文 | **55%** | 直接 LLM 生成 |
+| 用其他工具降重后 | 40.5% | 市面工具的同义词替换 |
+| 错误模仿"半口语化" | 49.6% ↑ | 破折号、"这一X"、对偶过渡（**反弹失败**） |
+| 本科生风格（仅 3 段验证） | 27.0% | 零破折号 + 第一人称 + 强制冗余（**策略验证**） |
+| **本科生风格 + 格式保留替换（全文）** | **11.0%** ↓↓ | **达标交付** |
+
+**从 55% 到 11%——降了 44 个百分点，稳过 15% 红线。**
 
 详见 [`data/case_study.md`](data/case_study.md)。
 
