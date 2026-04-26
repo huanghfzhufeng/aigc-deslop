@@ -16,7 +16,7 @@
 
 1. **方法论**（`SKILL.md`）：基于实测数据的"反 LLM 指纹"清单 + 三大铁律 + 12 项自检
 2. **工具**（`scripts/replace_docx.py`）：把改写后的 markdown 内容**保留格式替换**回原 docx——表格、图片、目录、引用上标、参考文献全部 byte-for-byte 保留
-3. **验证案例**（`data/case_study.md`）：真实毕业论文从 49.6% → 27% 的迭代过程
+3. **验证案例**（`data/case_study.md`）：真实毕业论文从 55% → 11% 的完整迭代过程
 
 ## 为什么市面上"用 AI 改 AI"经常失败
 
@@ -134,7 +134,7 @@ aigc-deslop/
 │   ├── workflow.md           ← 实战流程
 │   └── before_after.md       ← 改写前后对比
 └── data/
-    └── case_study.md         ← v1 49.6% → v3 27% 实测案例
+    └── case_study.md         ← v0 55% → v9 11% 完整迭代日志
 ```
 
 ## 限制与诚实预期
