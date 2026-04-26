@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 个人测试用的论文（含真实姓名/学号，不应入库）
+*.docx
+*.pdf
+!docs/*.docx
+!docs/*.pdf
+
+# 临时改写产物
+/tmp/
+*_v[0-9]*.docx
+*_v[0-9]*.md
+检测报告_*.pdf
+
+# 用户数据
+.env
+.env.local
