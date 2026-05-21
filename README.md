@@ -2,6 +2,8 @@
 
 > 把被 AI 抹平的"人之痕迹"，重新还回字里行间。
 
+[![Try aigc-deslop on Socialistic](https://socialistic.ai/api/embed/aigc-deslop-333114)](https://socialistic.ai/zh/skill/aigc-deslop-333114?utm_source=github&utm_medium=readme&utm_campaign=20260521-ai-text-humanizer-skills&utm_content=badge)
+
 一套用于**中文论文降 AIGC 率**的方法论 + 工具集。基于真实毕业论文的 9 轮迭代验证，从 **55% AIGC 率降至 11%**（全文实测），为 Claude Code 设计的 Skill。
 
 **English summary**: A Chinese-language methodology and toolset for reducing AI-detection rates in Chinese academic papers. Includes a Claude Code Skill (SKILL.md) and a Python script that rewrites paragraphs while preserving Word document formatting (tables, images, citation superscripts, fonts byte-for-byte). **Verified to reduce PaperPure AIGC detection rate from 55% to 11% on a full thesis** through 9 iterations.
