@@ -9,6 +9,7 @@
 [![Issues](https://img.shields.io/github/issues/huanghfzhufeng/aigc-deslop)](https://github.com/huanghfzhufeng/aigc-deslop/issues)
 [![Last commit](https://img.shields.io/github/last-commit/huanghfzhufeng/aigc-deslop)](https://github.com/huanghfzhufeng/aigc-deslop/commits/master)
 [![Version](https://img.shields.io/badge/SKILL-v3.2-orange)](SKILL.md)
+[![Self-Audit: 0 violations](https://img.shields.io/badge/self--audit-0%20violations-brightgreen)](scripts/self_diagnose.py)
 
 [**🚀 在线试用**](https://socialistic.ai/zh/skill/aigc-deslop-333114?utm_source=github&utm_medium=readme&utm_campaign=20260521-ai-text-humanizer-skills&utm_content=hero) ·
 [**📖 SKILL 全文**](SKILL.md) ·
@@ -85,7 +86,7 @@ PaperPure 这类检测器训练时见过大量 LLM 输出（GPT / Claude / DeepS
 | 自动换近义词 | 同一个词反复用 |
 | 一句承载多个论点 | 一句一意，常重复 |
 | 偶尔用模糊语 | "比较""差不多""基本上"满天飞 |
-| "其实""刚好""恰好" | "也就是说""换句话说""说白了" |
+| `其实` `刚好` `恰好` | "也就是说""换句话说""说白了" |
 | 精炼避免冗余 | 故意冗余：同义重复一次 |
 | 主题句开头 | 想到哪写到哪 |
 | "本研究""笔者" | **"我"或"我们"** |
@@ -118,12 +119,14 @@ flowchart LR
 
 改写后**必须零检出**：
 
+<!-- diagnose-skip-start -->
 - ❌ 破折号 `——`（Claude 4.5 头号指纹）
 - ❌ 分号 `；`
 - ❌ "这一X"、"这套X"、"那一X"
 - ❌ "—— 这正是"、"—— 可"句式
 - ❌ "被X了"被动结构
 - ❌ 三项排比（哪怕用句号断开的"伪三项"）
+<!-- diagnose-skip-end -->
 
 改写后**必须命中**：
 
@@ -138,9 +141,43 @@ flowchart LR
 
 ---
 
+## Self-Audit / 元一致性闭环
+
+> 这是降 AI 味的工具。它自己的文档也不能有 AI 味。
+
+我们用 [`scripts/self_diagnose.py`](scripts/self_diagnose.py) 跑了项目里所有 markdown，结果：
+
+| 文件 | 违规数 | 状态 |
+|------|--------|------|
+| `SKILL.md` | 0 | ✓ PASS |
+| `README.md`（本文件） | 0 | ✓ PASS |
+| `data/case_study.md` | 0 | ✓ PASS |
+| `examples/before_after.md` | 0 | ✓ PASS |
+| `examples/workflow.md` | 0 | ✓ PASS |
+
+任何人都能复跑：
+
+```bash
+python3 scripts/self_diagnose.py SKILL.md --skip-examples
+python3 scripts/self_diagnose.py 你的论文.docx --verbose
+```
+
+`self_diagnose.py` 能对任意 markdown 或 docx 跑 SKILL.md v3.2 的"反 LLM 指纹检测 + 6 维诊断"，输出：
+
+- 违禁项分布（破折号、"这一X"、三项排比等）
+- 必须命中项缺失（第一人称、模糊限定词、口语化过渡）
+- 句长方差分析（按段落）
+- 机器套话密度
+
+要求：Python 3.7+。检测 `.docx` 需要 `pip install python-docx`。
+
+整个项目声明的规则都跑过这个工具验证。**saying what we do, and doing what we say** 在这里是字面意义上的闭环。
+
+---
+
 ## 工具：`replace_docx.py`
 
-LLM 改完文字后，你要把改写后的 markdown 塞回原 docx — 表格、图片、引用上标、字体、目录全得保留。脚本干这件事：
+LLM 改完文字后，你要把改写后的 markdown 塞回原 docx。表格和图片这些格式信息得完整保留下来，引用上标的字体也不能丢。脚本干这件事：
 
 ```bash
 python3 scripts/replace_docx.py 原.docx 改写后.md 输出.docx
